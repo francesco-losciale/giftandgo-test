@@ -4,7 +4,7 @@
 - docker-compose
 - JDK 17
 
-# How to Run (it requires docker and docker-compose)
+# How to Run
 
 `docker-compose up -d` wait a few seconds for the db to start
 
