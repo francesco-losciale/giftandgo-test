@@ -22,9 +22,6 @@ import static org.mockito.Mockito.when;
 public class GeolocationServiceTest {
 
     @Mock
-    private RequestSentRepository requestSentRepository;
-
-    @Mock
     private IpCheckClient ipCheckClient;
 
     @InjectMocks
@@ -33,7 +30,7 @@ public class GeolocationServiceTest {
     @Test
     void shouldValidateIpAddress() throws Exception {
         when(ipCheckClient.check(any())).thenReturn(new IpCheckResponse("IT", "A random ISP", "success"));
-        GeolocationService geolocationService = new GeolocationService(ipCheckClient, requestSentRepository);
+        GeolocationService geolocationService = new GeolocationService(ipCheckClient);
 
         geolocationService.validateIpAddress("127.0.0.1");
     }
@@ -43,7 +40,7 @@ public class GeolocationServiceTest {
     void shouldFailWhitBlockedCountry(String blockedCountryCode) throws Exception {
         IpCheckResponse response = new IpCheckResponse(blockedCountryCode, "A random ISP", "success");
         when(ipCheckClient.check(any())).thenReturn(response);
-        GeolocationService geolocationService = new GeolocationService(ipCheckClient, requestSentRepository);
+        GeolocationService geolocationService = new GeolocationService(ipCheckClient);
 
         assertThrows(InvalidIpAddressException.class, () -> geolocationService.validateIpAddress("127.0.0.1"));
     }
@@ -53,7 +50,7 @@ public class GeolocationServiceTest {
     void shouldFailWhitBlockedISP(String blockedISP) throws Exception {
         IpCheckResponse response = new IpCheckResponse("A random country", blockedISP, "success");
         when(ipCheckClient.check(any())).thenReturn(response);
-        GeolocationService geolocationService = new GeolocationService(ipCheckClient, requestSentRepository);
+        GeolocationService geolocationService = new GeolocationService(ipCheckClient);
 
         assertThrows(InvalidIpAddressException.class, () -> geolocationService.validateIpAddress("127.0.0.1"));
     }

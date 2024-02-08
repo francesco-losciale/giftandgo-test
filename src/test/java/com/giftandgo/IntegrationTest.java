@@ -57,6 +57,7 @@ public class IntegrationTest {
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", VALID_CONTENT, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(403));
+        assertThat(requestSentRepository.findAll()).hasSize(1);
     }
 
     @Test
