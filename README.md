@@ -8,13 +8,17 @@
 
 `docker-compose up -d` wait a few seconds for the db to start
 
-## Start the app
+## Create the table
 
-`./gradlew flywayMigrate && ./gradlew bootRun`
+`./gradlew flywayMigrate`
 
 ## Run the tests
 
 `./gradlew test`
+
+## Start the app
+
+`./gradlew bootRun`
 
 ## Manual test
 
