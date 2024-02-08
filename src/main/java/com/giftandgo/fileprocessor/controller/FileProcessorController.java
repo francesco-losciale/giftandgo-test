@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.giftandgo.fileprocessor.model.Output;
 import com.giftandgo.fileprocessor.service.FileProcessorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +23,7 @@ public class FileProcessorController {
     }
 
     @PostMapping("/files/process")
-    public String processFile(@RequestBody String content) throws JsonProcessingException {
+    public String processFile(@Validated @RequestBody String content) throws JsonProcessingException {
         List<Output> outputList = fileProcessorService.generateOutput(content);
         return objectMapper.writeValueAsString(outputList);
     }

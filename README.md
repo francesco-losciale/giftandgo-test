@@ -3,13 +3,22 @@
 
 # TODO 
 
-- rest controller and test
+x- rest controller and test
+x - add validation of the file
+- feature flag to disable validation
+- finish all the happy paths and only afterwards thing to edge cases-  to save time
 
 - create script to run mysql docker container 
 - Flyway migration
 - bash script to initialise and start tests
 
 - Java 17? replace lombok with records?
+
+
+assumptions: 
+
+- file validation fails globally, not at row level
+
 
 
 curl -X POST \
