@@ -14,7 +14,8 @@ x - add validation of the file
 
 - Java 17? replace lombok with records?
 
-
+- lombok use everywhere
+- 
 assumptions: 
 
 - file validation fails globally, not at row level

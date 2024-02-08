@@ -1,6 +1,6 @@
-CREATE TABLE requests
+CREATE TABLE request_sent
 (
-    ID               VARCHAR(36) PRIMARY KEY,
+    ID               UUID PRIMARY KEY,
     URI              VARCHAR(255),
     CREATED_AT       TIMESTAMP,
     HTTP_STATUS_CODE INT,

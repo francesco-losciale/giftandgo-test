@@ -1,5 +1,7 @@
 package com.giftandgo;
 
+import com.giftandgo.geolocation.service.RequestSentRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +23,13 @@ public class IntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private RequestSentRepository requestSentRepository;
+
+    @BeforeEach
+    void setUp() {
+        requestSentRepository.deleteAll();
+    }
 
     @Test
     public void shouldProcessFileSuccessfully() {
@@ -30,6 +39,7 @@ public class IntegrationTest {
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
         assertThat(responseEntity.getBody()).isEqualToIgnoringWhitespace(EXPECTED_VALID_JSON_CONTENT);
+        assertThat(requestSentRepository.findAll()).hasSize(1);
     }
 
     @Test
@@ -38,6 +48,7 @@ public class IntegrationTest {
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", INVALID_CONTENT, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(400));
+        assertThat(requestSentRepository.findAll()).hasSize(1);
     }
 
     @Test
@@ -54,6 +65,7 @@ public class IntegrationTest {
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", VALID_CONTENT, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(400));
+        assertThat(requestSentRepository.findAll()).hasSize(1);
     }
 
     private static void stubSuccessfulChineseIpAddressResponse() {
