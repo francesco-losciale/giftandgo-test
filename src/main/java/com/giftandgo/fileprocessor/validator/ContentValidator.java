@@ -1,7 +1,7 @@
-package com.giftandgo.fileprocessor.service;
+package com.giftandgo.fileprocessor.validator;
 
-import com.giftandgo.fileprocessor.IDValidator;
-import com.giftandgo.fileprocessor.UUIDValidator;
+import com.giftandgo.fileprocessor.validator.IDValidator;
+import com.giftandgo.fileprocessor.validator.UUIDValidator;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

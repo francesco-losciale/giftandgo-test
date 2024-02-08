@@ -1,4 +1,4 @@
-package com.giftandgo.geolocation;
+package com.giftandgo.geolocation.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.giftandgo.geolocation.client.IpCheckConfig;

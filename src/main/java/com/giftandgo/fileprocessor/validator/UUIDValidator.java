@@ -1,4 +1,4 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.validator;
 
 import java.util.regex.Pattern;
 

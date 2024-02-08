@@ -1,7 +1,7 @@
 package com.giftandgo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.giftandgo.geolocation.RequestSentLogger;
+import com.giftandgo.geolocation.interceptor.RequestSentLogger;
 import com.giftandgo.geolocation.client.IpCheckConfig;
 import com.giftandgo.geolocation.service.RequestSentRepository;
 import org.springframework.boot.SpringApplication;

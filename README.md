@@ -12,6 +12,9 @@
 
 `./gradlew flywayMigrate && ./gradlew bootRun`
 
+## Run the tests
+
+`./gradlew test`
 
 ## Manual test
 
@@ -23,11 +26,6 @@ curl -i -X POST \
 1afb6f5d-a7c2-4311-a92d-974f3180ff5e|3X3D35|Jenny Walters|Likes Avocados|Rides A Scooter|8.5|15.3' \
 http://localhost:8080/files/process
 ```
-
-## Run the tests
-
-`./gradlew test`
-
 
 # Assumptions
 
