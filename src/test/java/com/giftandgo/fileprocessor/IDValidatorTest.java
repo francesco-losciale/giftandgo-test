@@ -16,5 +16,9 @@ public class IDValidatorTest {
     @Test
     void shouldFailWithInvalidUUID() {
         assertThat(IDValidator.isValid("")).isFalse();
+        assertThat(IDValidator.isValid("3X3D3F")).isFalse();
+        assertThat(IDValidator.isValid("323535")).isFalse();
+        assertThat(IDValidator.isValid("323D35")).isFalse();
+        assertThat(IDValidator.isValid("D23D35")).isFalse();
     }
 }

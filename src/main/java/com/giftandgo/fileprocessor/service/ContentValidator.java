@@ -17,7 +17,7 @@ public class ContentValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        String content = (String) target;
+        var content = (String) target;
         String[] fields = content.split("\\|");
 
         if (fields.length != 7) {

@@ -23,6 +23,5 @@ public class FileProcessorServiceTest {
         assertThat(result.get(0).name()).isEqualTo("John Smith");
         assertThat(result.get(1).name()).isEqualTo("Mike Smith");
         assertThat(result.get(2).name()).isEqualTo("Jenny Walters");
-
     }
 }

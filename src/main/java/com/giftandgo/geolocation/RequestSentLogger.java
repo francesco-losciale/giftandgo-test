@@ -29,13 +29,13 @@ public class RequestSentLogger implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        Instant start = Instant.now();
+        var start = Instant.now();
         ClientHttpResponse response = execution.execute(request, body);
-        Duration responseTime = Duration.between(start, Instant.now());
-        URI uri = request.getURI();
-        HttpStatusCode statusCode = response.getStatusCode();
-        IpCheckResponse ipCheckResponse = objectMapper.readValue(new String(response.getBody().readAllBytes()), IpCheckResponse.class);
-        RequestSent requestSent = createRequestSentObject(request, responseTime, uri, statusCode, ipCheckResponse);
+        var responseTime = Duration.between(start, Instant.now());
+        var uri = request.getURI();
+        var statusCode = response.getStatusCode();
+        var ipCheckResponse = objectMapper.readValue(new String(response.getBody().readAllBytes()), IpCheckResponse.class);
+        var requestSent = createRequestSentObject(request, responseTime, uri, statusCode, ipCheckResponse);
         requestSentRepository.save(requestSent);
         return response;
     }
@@ -46,8 +46,8 @@ public class RequestSentLogger implements ClientHttpRequestInterceptor {
                 .createdAt(LocalDateTime.now())
                 .httpStatusCode(statusCode.value())
                 .ipAddress(request.getURI().getHost())
-                .countryCode(ipCheckResponse.getCountryCode())
-                .ipProvider(ipCheckResponse.getIsp())
+                .countryCode(ipCheckResponse.countryCode())
+                .ipProvider(ipCheckResponse.isp())
                 .responseTime(responseTime.toMillis())
                 .build();
     }

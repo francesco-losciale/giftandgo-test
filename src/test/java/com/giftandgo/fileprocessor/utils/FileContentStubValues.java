@@ -1,4 +1,4 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.utils;
 
 public class FileContentStubValues {
 

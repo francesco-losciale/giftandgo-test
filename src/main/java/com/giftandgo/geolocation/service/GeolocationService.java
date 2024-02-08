@@ -21,11 +21,11 @@ public class GeolocationService {
 
     public void validateIpAddress(String ipAddress) throws InvalidIpAddressException, IOException, URISyntaxException, IpCheckFailureException {
         IpCheckResponse ipCheckResponse = client.check(ipAddress);
-        if (ipCheckResponse.getStatus().equals("fail")) {
+        if (ipCheckResponse.status().equals("fail")) {
             throw new IpCheckFailureException();
         }
-        if (blockedCountryCodeList.contains(ipCheckResponse.getCountryCode()) ||
-                blockedIspList.contains(ipCheckResponse.getIsp())) {
+        if (blockedCountryCodeList.contains(ipCheckResponse.countryCode()) ||
+                blockedIspList.contains(ipCheckResponse.isp())) {
             throw new InvalidIpAddressException();
         }
     }

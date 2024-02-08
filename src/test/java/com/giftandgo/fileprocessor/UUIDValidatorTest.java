@@ -14,6 +14,5 @@ public class UUIDValidatorTest {
     @Test
     void shouldFailValidationOfInvalidUUID() {
         assertThat(UUIDValidator.isValid("Invalid UUID")).isFalse();
-
     }
 }

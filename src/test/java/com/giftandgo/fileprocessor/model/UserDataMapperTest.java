@@ -1,8 +1,5 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.model;
 
-import com.giftandgo.fileprocessor.model.Output;
-import com.giftandgo.fileprocessor.model.UserData;
-import com.giftandgo.fileprocessor.model.UserDataMapper;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
