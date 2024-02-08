@@ -1,4 +1,4 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.geolocation;
 
 import com.giftandgo.geolocation.client.IpCheckClient;
 import com.giftandgo.geolocation.service.IpCheckFailureException;
@@ -33,9 +33,7 @@ public class GeolocationServiceTest {
         when(client.check(any())).thenReturn(response);
         GeolocationService geolocationService = new GeolocationService(client);
 
-        assertThrows(InvalidIpAddressException.class, () -> {
-            geolocationService.validateIpAddress("127.0.0.1");
-        });
+        assertThrows(InvalidIpAddressException.class, () -> geolocationService.validateIpAddress("127.0.0.1"));
     }
 
     @ParameterizedTest
@@ -46,9 +44,7 @@ public class GeolocationServiceTest {
         when(client.check(any())).thenReturn(response);
         GeolocationService geolocationService = new GeolocationService(client);
 
-        assertThrows(InvalidIpAddressException.class, () -> {
-            geolocationService.validateIpAddress("127.0.0.1");
-        });
+        assertThrows(InvalidIpAddressException.class, () -> geolocationService.validateIpAddress("127.0.0.1"));
     }
 
     @Test
@@ -58,8 +54,6 @@ public class GeolocationServiceTest {
         when(client.check(any())).thenReturn(response);
         GeolocationService geolocationService = new GeolocationService(client);
 
-        assertThrows(IpCheckFailureException.class, () -> {
-            geolocationService.validateIpAddress("127.0.0.1");
-        });
+        assertThrows(IpCheckFailureException.class, () -> geolocationService.validateIpAddress("127.0.0.1"));
     }
 }

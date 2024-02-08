@@ -1,4 +1,4 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

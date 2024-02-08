@@ -1,6 +1,5 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.model;
 
-import com.giftandgo.fileprocessor.model.UserData;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

@@ -1,6 +1,5 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.service;
 
-import com.giftandgo.fileprocessor.service.FileProcessorService;
 import com.giftandgo.fileprocessor.model.Output;
 import org.junit.jupiter.api.Test;
 

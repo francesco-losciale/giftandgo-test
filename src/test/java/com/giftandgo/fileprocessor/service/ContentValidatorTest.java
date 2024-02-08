@@ -1,6 +1,5 @@
-package com.giftandgo.fileprocessor;
+package com.giftandgo.fileprocessor.service;
 
-import com.giftandgo.fileprocessor.service.ContentValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
