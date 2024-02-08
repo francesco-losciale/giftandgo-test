@@ -1,6 +1,7 @@
 package com.giftandgo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.giftandgo.geolocation.service.IpCheckFailureException;
 import com.giftandgo.geolocation.service.GeolocationService;
 import com.giftandgo.geolocation.service.InvalidIpAddressException;
 import com.giftandgo.fileprocessor.model.Output;
@@ -29,7 +30,7 @@ public class FileProcessorController {
     }
 
     @PostMapping("/files/process")
-    public String processFile(HttpServletRequest request, @Validated @RequestBody String content) throws IOException, InvalidIpAddressException, URISyntaxException {
+    public String processFile(HttpServletRequest request, @Validated @RequestBody String content) throws IOException, InvalidIpAddressException, URISyntaxException, IpCheckFailureException {
         String ipAddress = request.getRemoteAddr();
         geolocationService.validateIpAddress(ipAddress);
         List<Output> outputList = fileProcessorService.generateOutput(content);

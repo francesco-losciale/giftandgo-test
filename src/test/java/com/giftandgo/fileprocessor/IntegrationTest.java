@@ -24,7 +24,7 @@ public class IntegrationTest {
 
     @Test
     public void shouldProcessFileSuccessfully() {
-        stubSuccessfulIpCheckResponse();
+        stubSuccessfullItalianIpAddressResponse();
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", VALID_CONTENT, String.class);
 
@@ -34,21 +34,29 @@ public class IntegrationTest {
 
     @Test
     public void shouldFailDueToValidation() {
-        stubSuccessfulIpCheckResponse();
+        stubSuccessfullItalianIpAddressResponse();
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", INVALID_CONTENT, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(400));
     }
 
     @Test
-    void shouldFailDueToInvalidGeolocation() {
-        stubUnsuccessfulIpCheckResponse();
+    void shouldFailIfClientIpAddressIsBlocked() {
+        stubSuccessfulChineseIpAddressResponse();
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", VALID_CONTENT, String.class);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(403));
     }
 
-    private static void stubUnsuccessfulIpCheckResponse() {
+    @Test
+    void shouldFailIfClientIpAddressIsInvalid() {
+        stubUnsuccessfulResponse();
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity("/files/process", VALID_CONTENT, String.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(400));
+    }
+
+    private static void stubSuccessfulChineseIpAddressResponse() {
         stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
                 .willReturn(aResponse()
                         .withStatus(200)
@@ -65,7 +73,7 @@ public class IntegrationTest {
                                 }""")));
     }
 
-    private static void stubSuccessfulIpCheckResponse() {
+    private static void stubSuccessfullItalianIpAddressResponse() {
         stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
                 .willReturn(aResponse()
                         .withStatus(200)
@@ -79,6 +87,21 @@ public class IntegrationTest {
                                   "country": "Italy",
                                   "countryCode": "IT",
                                   "isp": "Telecom"
+                                }""")));
+    }
+
+    private static void stubUnsuccessfulResponse() {
+        stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(
+                                //language=JSON
+                                """
+                                {
+                                  "query": "127.0.0.1",
+                                  "message": "reserved range",
+                                  "status": "fail"
                                 }""")));
     }
 }

@@ -19,8 +19,11 @@ public class GeolocationService {
         this.client = client;
     }
 
-    public void validateIpAddress(String ipAddress) throws InvalidIpAddressException, IOException, URISyntaxException {
+    public void validateIpAddress(String ipAddress) throws InvalidIpAddressException, IOException, URISyntaxException, IpCheckFailureException {
         IpCheckResponse ipCheckResponse = client.check(ipAddress);
+        if (ipCheckResponse.getStatus().equals("fail")) {
+            throw new IpCheckFailureException();
+        }
         if (blockedCountryCodeList.contains(ipCheckResponse.getCountryCode()) ||
                 blockedIspList.contains(ipCheckResponse.getIsp())) {
             throw new InvalidIpAddressException();

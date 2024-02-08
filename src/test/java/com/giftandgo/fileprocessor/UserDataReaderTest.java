@@ -24,8 +24,4 @@ public class UserDataReaderTest {
         ));
     }
 
-//    @Test
-//    void shouldReturnEmptyListWhenContentIsEmpty() {
-//        assertThat(userDataReader.readFileContent("")).isEqualTo(List.of());
-//    }
 }

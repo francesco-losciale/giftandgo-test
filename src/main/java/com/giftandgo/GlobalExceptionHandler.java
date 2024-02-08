@@ -1,5 +1,6 @@
 package com.giftandgo;
 
+import com.giftandgo.geolocation.service.IpCheckFailureException;
 import com.giftandgo.geolocation.service.InvalidIpAddressException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleValidationExceptions(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(IpCheckFailureException.class)
+    public ResponseEntity<String> handleIpCheckExceptions(IpCheckFailureException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
