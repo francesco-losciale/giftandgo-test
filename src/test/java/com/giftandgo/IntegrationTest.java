@@ -16,7 +16,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = {"ip-check.api-url=http://localhost:${wiremock.server.port}"})
+@TestPropertySource(properties = {
+        "ip-check.api-url=http://localhost:${wiremock.server.port}/ip-check",
+        "find-my-ip-address.api-url=http://localhost:${wiremock.server.port}/find-my-ip-address"
+})
 @AutoConfigureWireMock(port = 0)
 public class IntegrationTest {
 
@@ -28,6 +31,7 @@ public class IntegrationTest {
 
     @BeforeEach
     void setUp() {
+        stubAwsCheckIp();
         requestSentRepository.deleteAll();
     }
 
@@ -70,7 +74,7 @@ public class IntegrationTest {
     }
 
     private static void stubSuccessfulChineseIpAddressResponse() {
-        stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
+        stubFor(get(urlPathEqualTo("/ip-check/json/127.0.0.1"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -87,7 +91,7 @@ public class IntegrationTest {
     }
 
     private static void stubSuccessfullItalianIpAddressResponse() {
-        stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
+        stubFor(get(urlPathEqualTo("/ip-check/json/127.0.0.1"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -104,7 +108,7 @@ public class IntegrationTest {
     }
 
     private static void stubUnsuccessfulResponse() {
-        stubFor(get(urlPathEqualTo("/json/127.0.0.1"))
+        stubFor(get(urlPathEqualTo("/ip-check/json/127.0.0.1"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
@@ -116,5 +120,13 @@ public class IntegrationTest {
                                   "message": "reserved range",
                                   "status": "fail"
                                 }""")));
+    }
+
+    private static void stubAwsCheckIp() {
+        stubFor(get(urlPathEqualTo("/find-my-ip-address/"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/text")
+                        .withBody("127.0.0.1")));
     }
 }

@@ -1,6 +1,9 @@
 ip-check:
   api-url: "http://ip-api.com"
 
+find-my-ip-address:
+  api-url: "http://checkip.amazonaws.com"
+
 spring:
   datasource:
     username: postgres
